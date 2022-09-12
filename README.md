@@ -1,4 +1,11 @@
-# Relay Fan Output
+# Relay Fan Output for ESPhome and Home Assistant
+
+I just discovered [ESPHome](https://esphome.io/) and [Home
+Assistant](https://www.home-assistant.io/), and they are pretty much
+the most amazing thing since sliced bread.  But I needed a slightly
+different method of output (I think I did anyway) that will guarantee
+strict timings of relays to ensure no major switching transients with
+a motor.
 
 This is an output module for controlling relay based fans, or other
 interlocking mechanisms where it's important that you exclusively only
