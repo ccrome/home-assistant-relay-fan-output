@@ -1,0 +1,50 @@
+esphome:
+  name: relayfan
+  includes: relayfan.h
+  libraries:
+    - Ticker
+
+esp32:
+  board: esp32dev
+  framework:
+    type: arduino
+# Enable logging
+logger:
+# Enable Home Assistant API
+api:
+
+ota:
+
+wifi:
+  ssid: !
+  password: !
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Livingroom Fallback Hotspot"
+    password: "QwAdZ09oVazZ"
+
+captive_portal:
+
+status_led:
+  pin:
+    number: GPIO2
+
+output:
+  - platform: custom
+    type: float
+    lambda: |-
+      static int speeds[] = {16, 17, 18};
+      int n_speeds = 3;
+      auto relay_fan = new RelayFanOutput(speeds, n_speeds, 2000, 100);
+      App.register_component(relay_fan);
+      return {relay_fan};
+
+    outputs:
+      id: relay_fan
+
+fan:
+  - platform: speed
+    output: relay_fan
+    name: "Relay Fan 3 Speed"
+    speed_count: 3
+    id: attic_fan
